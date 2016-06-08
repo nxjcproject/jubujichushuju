@@ -35,7 +35,7 @@
                             <tr>
                                 <td>生产线：</td>
                                 <td>
-                                    <input id="productLineName" class="easyui-textbox" style="width: 180px;" readonly="true" /><input id="organizationId" readonly="true" style="display: none;" /></td>
+                                    <input id="productLineName" class="easyui-textbox" style="width: 180px;" readonly="readonly" /><input id="organizationId" readonly="readonly" style="display: none;" /></td>
 
                                 <td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
                                     onclick="RefreshFun();">刷新</a>
@@ -56,7 +56,7 @@
         <div id="reportTable" class="easyui-panel" data-options="region:'center', border:true, collapsible:false, split:false">
             <table id="gridMain_ReportTemplate"></table>
         </div>
-        <!-- 图表结束 -->
+           <!-- 图表结束 -->
     </div>
 
     <form id="form_Main" runat="server"></form>

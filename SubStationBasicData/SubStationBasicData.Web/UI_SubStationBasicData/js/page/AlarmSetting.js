@@ -36,18 +36,57 @@ function loadDatagrid(loadType) {
         $('#gridMain_ReportTemplate').treegrid({
             columns: [[
                 { field: 'Name', title: '名称', width: 200 },
-                { field: 'AlarmTypeName', title: '报警类型', width: 150 },
+                //{ field: 'AlarmType', title: '报警类型', width: 150 },
                 {
-                    field: 'EnergyAlarmValue', title: '能耗报警值', width: 100, editor: 'text',
-                    styler: function (value, row, index) { if (row.AlarmType == 1 || row.AlarmType == 3) { return 'color:red;'; } }
+                    field: 'EnergyAlarmValue', title: '能耗报警值', width: 100, editor: 'text'
+                    //,
+                    //styler: function (value, row, index) { if (row.AlarmType == 1 || row.AlarmType == 3) { return 'color:red;'; } }
                 },
                 {
-                    field: 'PowerAlarmValue', title: '功率报警值', width: 100, editor: 'text',
-                    styler: function (value, row, index) { if (row.AlarmType == 2 || row.AlarmType == 3) { return 'color:red;'; } }
+                    field: 'AlarmTypeE', title: '是否有效', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.EnergyAlarmValue != "") {
+                            if (row.AlarmType == 1 || row.AlarmType == 3) {
+                                return value = "是";
+                            } else {
+                                return value = "否";
+                            }
+                        }                      
+                    }          
                 },
                 {
-                    field: 'CoalDustConsumptionAlarm', title: '煤耗报警值', width: 100, editor: 'text',
-                    styler: function (value, row, index) { if (row.VariableId == "clinker") { return 'color:red;'; } }
+                    field: 'PowerAlarmValue', title: '功率报警值', width: 100, editor: 'text'
+                    //,
+                    //styler: function (value, row, index) { if (row.AlarmType == 2 || row.AlarmType == 3) { return 'color:red;'; } }
+                },
+                {
+                    field: 'AlarmTypeP', title: '是否有效', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.PowerAlarmValue != "") {
+                            if (row.AlarmType == 2 || row.AlarmType == 3) {
+                                return value = "是";
+                            } else {
+                                return value = "否";
+                            }
+                        }                     
+                    }
+                },
+                {
+                    field: 'CoalDustConsumptionAlarm', title: '煤耗报警值', width: 100, editor: 'text'
+                    //,
+                    //styler: function (value, row, index) { if (row.VariableId == "clinker") { return 'color:red;'; } }
+                },
+                {
+                    field: 'AlarmTypeC', title: '是否有效', width: 60, align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.CoalDustConsumptionAlarm != "") {
+                            if (row.AlarmType == 1 || row.AlarmType == 3) {
+                                return value = "是";
+                            } else {
+                                return value = "否";
+                            }
+                        }
+                    }
                 }
             ]],
             toolbar: "#toolbar_ReportTemplate",

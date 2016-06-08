@@ -16,7 +16,7 @@ namespace SubStationBasicData.Service.Alarm
         {
             string connectionString = ConnectionStringFactory.NXJCConnectionString;
             ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
-            string mySql = @"select A.KeyID,A.OrganizationID,B.LevelCode,B.VariableId,B.Name,B.AlarmType,B.EnergyAlarmValue,B.CoalDustConsumptionAlarm,B.PowerAlarmValue 
+            string mySql = @"select A.KeyID,A.OrganizationID,B.LevelCode,B.VariableId,B.Name,B.AlarmType,B.EnergyAlarmValue,B.AlarmType as AlarmTypeE, B.CoalDustConsumptionAlarm,B.AlarmType as AlarmTypeP,B.PowerAlarmValue,B.AlarmType as AlarmTypeC 
                                 from tz_Formula A,formula_FormulaDetail B,system_Organization C
                                 where A.KeyID=B.KeyID
                                 and A.OrganizationID=C.OrganizationID
