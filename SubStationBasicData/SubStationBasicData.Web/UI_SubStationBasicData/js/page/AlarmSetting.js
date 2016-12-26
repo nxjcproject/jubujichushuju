@@ -38,7 +38,7 @@ function loadDatagrid(loadType) {
                 { field: 'Name', title: '名称', width: 200 },
                 //{ field: 'AlarmType', title: '报警类型', width: 150 },
                 {
-                    field: 'EnergyAlarmValue', title: '能耗报警值', width: 100, editor: 'text'
+                    field: 'EnergyAlarmValue', title: '能耗报警值', width: 80, editor: 'text'
                     //,
                     //styler: function (value, row, index) { if (row.AlarmType == 1 || row.AlarmType == 3) { return 'color:red;'; } }
                 },
@@ -55,7 +55,7 @@ function loadDatagrid(loadType) {
                     }          
                 },
                 {
-                    field: 'PowerAlarmValue', title: '功率报警值', width: 100, editor: 'text'
+                    field: 'PowerAlarmValue', title: '功率报警值', width: 80, editor: 'text'
                     //,
                     //styler: function (value, row, index) { if (row.AlarmType == 2 || row.AlarmType == 3) { return 'color:red;'; } }
                 },
@@ -72,7 +72,7 @@ function loadDatagrid(loadType) {
                     }
                 },
                 {
-                    field: 'CoalDustConsumptionAlarm', title: '煤耗报警值', width: 100, editor: 'text'
+                    field: 'CoalDustConsumptionAlarm', title: '煤耗报警值', width: 80, editor: 'text'
                     //,
                     //styler: function (value, row, index) { if (row.VariableId == "clinker") { return 'color:red;'; } }
                 },

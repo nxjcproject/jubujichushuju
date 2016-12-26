@@ -42,7 +42,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="SystemParameters.UpdateNotification">
-      <HintPath>..\..\..\bin\SystemParameters.UpdateNotification.dll</HintPath>
+      <HintPath>..\..\..\..\..\通用引用\SystemParameters.UpdateNotification.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
