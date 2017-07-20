@@ -22,6 +22,7 @@ namespace SubStationBasicData.Web.UI_SubStationBasicData.Alarm
                 ////////////////////调试用,自定义的数据授权
                 List<string> m_DataValidIdItems = new List<string>() { "zc_nxjc_byc_byf" };
                 AddDataValidIdGroup("ProductionOrganization", m_DataValidIdItems);
+                mPageOpPermission = "1111";
 #elif RELEASE
 #endif
                 //向web用户控件传递数据授权参数

@@ -75,7 +75,9 @@ namespace SubStationBasicData.Service.Alarm
                 saveDataTable.Columns.Remove("id");
                 saveDataTable.Columns.Remove("OrganizationID");
                 saveDataTable.Columns.Remove("Name");
-                saveDataTable.Columns.Remove("AlarmType");
+                saveDataTable.Columns.Remove("AlarmTypeE");
+                saveDataTable.Columns.Remove("AlarmTypeP");
+                saveDataTable.Columns.Remove("AlarmTypeC");
                 saveDataTable.Columns.Remove("AlarmTypeName");
 
                 m_UpdateRowCount = dataFactory.Update("formula_FormulaDetail", saveDataTable, new string[] { "KeyID", "VariableId", "LevelCode" });
