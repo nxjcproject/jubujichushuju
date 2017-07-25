@@ -12,7 +12,6 @@ namespace SubStationBasicData.Web.UI_SubStationBasicData.Alarm
 {
     public partial class AlarmSetting : WebStyleBaseForEnergy.webStyleBase
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             base.InitComponts();
@@ -47,22 +46,26 @@ namespace SubStationBasicData.Web.UI_SubStationBasicData.Alarm
             DataTable table= AlarmSettingService.GetAlarmData(organizationId);
             string json = EasyUIJsonParser.TreeGridJsonParser.DataTableToJsonByLevelCode(table, "LevelCode");
             return json;
-        }
-
+        }      
+        //public static int SaveAlarmValues(string organizationId, string datagridData)
+        //{
+        //    if (mPageOpPermission.ToArray()[2] == '1')
+        //    {
+        //        DataTable table = EasyUIJsonParser.TreeGridJsonParser.JsonToDataTable(datagridData);
+        //        int m_Result = AlarmSettingService.SaveAlarmValues(organizationId, table);
+        //        m_Result = m_Result > 0 ? 1 : m_Result;
+        //        return m_Result;
+        //    }
+        //    else
+        //    {
+        //        return -1;
+        //    }
+        //}
         [WebMethod]
-        public static int SaveAlarmValues(string organizationId, string datagridData)
+        public static int SaveAlarmInfo(string mID, string mEnergyAlarmValue, string mPowerAlarmValue, string mCoalAlarmValue, string mAlarmType)
         {
-            if (mPageOpPermission.ToArray()[2] == '1')
-            {
-                DataTable table = EasyUIJsonParser.TreeGridJsonParser.JsonToDataTable(datagridData);
-                int m_Result = AlarmSettingService.SaveAlarmValues(organizationId, table);
-                m_Result = m_Result > 0 ? 1 : m_Result;
-                return m_Result;
-            }
-            else
-            {
-                return -1;
-            }
+            int result = AlarmSettingService.SaveAlarmInfoData(mID, mEnergyAlarmValue, mPowerAlarmValue, mCoalAlarmValue, mAlarmType);
+            return result;
         }
     }
 }

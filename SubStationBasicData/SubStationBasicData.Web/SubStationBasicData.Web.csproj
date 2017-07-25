@@ -58,6 +58,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="SystemParameters.UpdateNotification">
+      <HintPath>..\SubStationBasicData.Service\bin\Release\SystemParameters.UpdateNotification.dll</HintPath>
+    </Reference>
     <Reference Include="WebStyleBaseForEnergy">
       <HintPath>..\..\Lib\WebStyleBaseForEnergy.dll</HintPath>
     </Reference>
@@ -1617,6 +1620,9 @@
     <Folder Include="Images\common\" />
     <Folder Include="Images\Page\" />
     <Folder Include="js\page\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

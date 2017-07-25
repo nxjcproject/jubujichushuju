@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-
+using SystemParameters.UpdateNotification;
 namespace SubStationBasicData.Service.Alarm
 {
     public class AlarmSettingService
@@ -16,7 +16,7 @@ namespace SubStationBasicData.Service.Alarm
         {
             string connectionString = ConnectionStringFactory.NXJCConnectionString;
             ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
-            string mySql = @"select A.KeyID,A.OrganizationID,B.LevelCode,B.VariableId,B.Name,B.AlarmType,B.EnergyAlarmValue,B.AlarmType as AlarmTypeE, B.CoalDustConsumptionAlarm,B.AlarmType as AlarmTypeP,B.PowerAlarmValue,B.AlarmType as AlarmTypeC 
+            string mySql = @"select A.KeyID,A.OrganizationID,B.ID,B.LevelCode,B.VariableId,B.Name,B.AlarmType,B.EnergyAlarmValue,B.AlarmType as AlarmTypeE, B.CoalDustConsumptionAlarm,B.AlarmType as AlarmTypeP,B.PowerAlarmValue,B.AlarmType as AlarmTypeC 
                                 from tz_Formula A,formula_FormulaDetail B,system_Organization C
                                 where A.KeyID=B.KeyID
                                 and A.OrganizationID=C.OrganizationID
@@ -28,7 +28,7 @@ namespace SubStationBasicData.Service.Alarm
 //                                and C.LevelCode like (SELECT LevelCode FROM system_Organization where OrganizationID=@organizationId)+'%'
 //                                order by B.LevelCode";
             SqlParameter parameter = new SqlParameter("organizationId",organizationId);
-            DataTable alarmInfoTable=dataFactory.Query(mySql,parameter);
+            DataTable alarmInfoTable = dataFactory.Query(mySql, parameter);
             //报警类型名
             DataColumn alarmTypeColumn = new DataColumn("AlarmTypeName",typeof(string));
             alarmTypeColumn.DefaultValue = "无";
@@ -65,26 +65,26 @@ namespace SubStationBasicData.Service.Alarm
         //    //string[] rowsData = EasyUIJsonParser.Utility.JsonPickArray(json, "rows");
         //    return EasyUIJsonParser.TreeGridJsonParser.JsonToDataTable(json);
         //}
-        public static int SaveAlarmValues(string organizationId, DataTable saveDataTable)
-        {
-            string connectionString = ConnectionStringFactory.NXJCConnectionString;
-            ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
-            int m_UpdateRowCount = 0;
-            if (saveDataTable != null)
-            {
-                saveDataTable.Columns.Remove("id");
-                saveDataTable.Columns.Remove("OrganizationID");
-                saveDataTable.Columns.Remove("Name");
-                saveDataTable.Columns.Remove("AlarmTypeE");
-                saveDataTable.Columns.Remove("AlarmTypeP");
-                saveDataTable.Columns.Remove("AlarmTypeC");
-                saveDataTable.Columns.Remove("AlarmTypeName");
+        //public static int SaveAlarmValues(string organizationId, DataTable saveDataTable)
+        //{
+        //    string connectionString = ConnectionStringFactory.NXJCConnectionString;
+        //    ISqlServerDataFactory dataFactory = new SqlServerDataFactory(connectionString);
+        //    int m_UpdateRowCount = 0;
+        //    if (saveDataTable != null)
+        //    {
+        //        saveDataTable.Columns.Remove("id");
+        //        saveDataTable.Columns.Remove("OrganizationID");
+        //        saveDataTable.Columns.Remove("Name");
+        //        saveDataTable.Columns.Remove("AlarmTypeE");
+        //        saveDataTable.Columns.Remove("AlarmTypeP");
+        //        saveDataTable.Columns.Remove("AlarmTypeC");
+        //        saveDataTable.Columns.Remove("AlarmTypeName");
 
-                m_UpdateRowCount = dataFactory.Update("formula_FormulaDetail", saveDataTable, new string[] { "KeyID", "VariableId", "LevelCode" });
-                RestartDataCollection(organizationId);   //自动重启数采软件
-            }
-            return m_UpdateRowCount;
-        }
+        //        m_UpdateRowCount = dataFactory.Update("formula_FormulaDetail", saveDataTable, new string[] { "KeyID", "VariableId", "LevelCode" });
+        //        RestartDataCollection(organizationId);   //自动重启数采软件
+        //    }
+        //    return m_UpdateRowCount;
+        //}
         private static void RestartDataCollection(string organizationId)
         {
 
@@ -109,6 +109,24 @@ namespace SubStationBasicData.Service.Alarm
                 }
             }
             
+        }
+        public static int SaveAlarmInfoData(string mID, string mEnergyAlarmValue, string mPowerAlarmValue, string mCoalAlarmValue, string mAlarmType)
+        {
+            string connectionString = ConnectionStringFactory.NXJCConnectionString;
+            ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
+            string mySql = @"UPDATE [dbo].[formula_FormulaDetail]
+                                SET  [EnergyAlarmValue]=@mEnergyAlarmValue
+                                    ,[PowerAlarmValue]=@mPowerAlarmValue
+                                    ,[CoalDustConsumptionAlarm]=@mCoalAlarmValue
+                                    ,[AlarmType]=@mAlarmType                                  
+                              WHERE  [ID]=@mID";
+            SqlParameter[] para = { new SqlParameter("@mID",mID),
+                                    new SqlParameter("@mEnergyAlarmValue",mEnergyAlarmValue),
+                                    new SqlParameter("@mPowerAlarmValue",mPowerAlarmValue),
+                                    new SqlParameter("@mCoalAlarmValue",mCoalAlarmValue),
+                                    new SqlParameter("@mAlarmType",mAlarmType)};
+            int dt = factory.ExecuteSQL(mySql, para);
+            return dt;
         }
     }
 }

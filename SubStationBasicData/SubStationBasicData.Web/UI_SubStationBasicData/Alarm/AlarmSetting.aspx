@@ -40,12 +40,12 @@
                                 <td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
                                     onclick="RefreshFun();">刷新</a>
                                 </td>
-                                <td>
+                                <%--<td>
                                     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">撤销</a>
                                 </td>
                                 <td>
                                     <a href="#" id="edit" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="saveFun();">保存</a>
-                                </td>
+                                </td>--%>
                             </tr>
                         </table>
                     </td>
@@ -58,9 +58,55 @@
         </div>
            <!-- 图表结束 -->
     </div>
-
+    <div id="editAlarmInfo" class="easyui-window" title="编辑报警信息" data-options="modal:true,closed:true,iconCls:'icon-edit',minimizable:false,maximizable:false,collapsible:false,resizable:false" style="width:350px;height:250px;padding:10px 60px 20px 60px">
+	    	    <table>
+                     <tr>
+	    			    <td>名称：</td>
+	    			    <td>
+                          <input class="easyui-textbox" id="productionName" style="width:100px" type="text" readonly="readonly"/>           
+	    			    </td>
+	    		    </tr>
+                    <tr>
+	    			    <td>能耗报警值：</td> 
+	    			    <td><input class="easyui-numberbox" type="text" id="energyAlarmvalue" style="width:100px" data-options="precision:2";/></td>
+	    		    </tr>
+                    <tr>
+	    			    <td>是否有效：</td>
+	    			    <td>
+                          <select class="easyui-combobox" id="alarmTypeE" style="width:100px" data-options="editable:false,panelHeight: 'auto'">
+                              <option value="1">是</option>
+                              <option value="0">否</option>        
+                          </select>           
+	    			    </td>
+	    		    </tr>
+                    <tr>
+	    			    <td>功率报警值：</td>
+	    			    <td>
+                          <input class="easyui-numberbox" id="powerAlarmValue" type="text" style="width:100px" data-options="precision:2";/>           
+	    			    </td>
+	    		    </tr>
+                    <tr>
+	    			    <td>是否有效：</td>
+	    			    <td>
+                          <select class="easyui-combobox" id="alarmTypeP" style="width:100px" data-options="editable:false,panelHeight: 'auto'"> 
+                              <option value="1">是</option>
+                              <option value="0">否</option>        
+                          </select>             
+	    			    </td>
+	    		    </tr>
+                    <tr>
+	    			    <td>煤耗报警值：</td>
+	    			    <td>
+                          <input class="easyui-numberbox" id="coalAlarmValue" type="text" style="width:100px" data-options="precision:2";/>           
+	    			    </td>
+	    		    </tr>     
+	    	    </table>
+	            <div style="text-align:center;padding:5px;margin-left:-18px;">
+	    	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="saveAlarmInfo()">保存</a>
+	    	        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="$('#editAlarmInfo').window('close');">取消</a>
+	            </div>
+    </div>             
     <form id="form_Main" runat="server"></form>
-
 </body>
 </html>
 
