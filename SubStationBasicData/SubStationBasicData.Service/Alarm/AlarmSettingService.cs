@@ -112,6 +112,33 @@ namespace SubStationBasicData.Service.Alarm
         }
         public static int SaveAlarmInfoData(string mID, string mEnergyAlarmValue, string mPowerAlarmValue, string mCoalAlarmValue, string mAlarmType)
         {
+            object mEnergyAlarmvalue = "";
+            object mPowerAlarmvalue = "";
+            object mCoalAlarmvalue = "";
+            if (mEnergyAlarmValue == "")
+            {
+                mEnergyAlarmvalue = DBNull.Value;
+            }
+            else
+            {
+                mEnergyAlarmvalue = mEnergyAlarmValue;
+            }
+            if (mPowerAlarmValue == "")
+            {
+                mPowerAlarmvalue = DBNull.Value;
+            }
+            else
+            {
+                mPowerAlarmvalue = mPowerAlarmValue;
+            }
+            if (mCoalAlarmValue == "")
+            {
+                mCoalAlarmvalue = DBNull.Value;
+            }
+            else
+            {
+                mCoalAlarmvalue = mCoalAlarmValue;
+            }
             string connectionString = ConnectionStringFactory.NXJCConnectionString;
             ISqlServerDataFactory factory = new SqlServerDataFactory(connectionString);
             string mySql = @"UPDATE [dbo].[formula_FormulaDetail]
@@ -121,9 +148,9 @@ namespace SubStationBasicData.Service.Alarm
                                     ,[AlarmType]=@mAlarmType                                  
                               WHERE  [ID]=@mID";
             SqlParameter[] para = { new SqlParameter("@mID",mID),
-                                    new SqlParameter("@mEnergyAlarmValue",mEnergyAlarmValue),
-                                    new SqlParameter("@mPowerAlarmValue",mPowerAlarmValue),
-                                    new SqlParameter("@mCoalAlarmValue",mCoalAlarmValue),
+                                    new SqlParameter("@mEnergyAlarmValue",mEnergyAlarmvalue),
+                                    new SqlParameter("@mPowerAlarmValue",mPowerAlarmvalue),
+                                    new SqlParameter("@mCoalAlarmValue",mCoalAlarmvalue),
                                     new SqlParameter("@mAlarmType",mAlarmType)};
             int dt = factory.ExecuteSQL(mySql, para);
             return dt;
